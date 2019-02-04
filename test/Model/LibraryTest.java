@@ -56,15 +56,19 @@ public class LibraryTest {
 
     @Test
     public void rentAnItem() {
-
         library.addAnItemToTheLibrary(manager, book);
+        assertFalse(book.isRented());
         library.rentAnItem(user1, book);
-        assertArrayEquals(true, book);
-
-
+        assertTrue(book.isRented());
     }
 
     @Test
     public void returnAnItem() {
+        library.addAnItemToTheLibrary(manager, book);
+        assertFalse(book.isRented());
+        library.rentAnItem(user1, book);
+        assertTrue(book.isRented());
+        library.returnAnItem(user1, book);
+        assertFalse(book1.isRented());
     }
 }

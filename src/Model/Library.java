@@ -30,17 +30,24 @@ public class Library {
         if(user.isManager()) itemsList.remove(mediaItem);
     }
 
-    public void rentAnItem(User user, MediaItem mediaItem){
-        if(mediaItem.isRented()){
-            System.out.println("This item is already rented");
-        } else {
-            user.addItemsToRentedList(mediaItem);
-            mediaItem.setRented(true);
+    public void rentAnItem(User user, MediaItem mediaItem) {
+        if (itemsList.indexOf(mediaItem) >= 0){
+            if (mediaItem.isRented()) {
+                System.out.println("This item is already rented");
+            } else {
+                user.addItemsToRentedList(mediaItem);
+                mediaItem.setRented(true);
+                mediaItem.setCurrentUser(user);
+            }
         }
     }
 
     public void returnAnItem(User user, MediaItem mediaItem){
-        user.removeItemsFromRentedList(mediaItem);
-        mediaItem.setRented(false);
+
+        if (itemsList.indexOf(mediaItem) >= 0 && mediaItem.isRented() && mediaItem.getCurrentUser().equals(user)){
+                user.removeItemsFromRentedList(mediaItem);
+                mediaItem.setRented(false);
+                mediaItem.setCurrentUser(null);
+        }
     }
 }

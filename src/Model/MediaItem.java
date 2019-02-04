@@ -26,16 +26,24 @@ public abstract class MediaItem implements Previewable, Saveable{
     private int length;
     private Date releaseDate;
     private Integer ID = itemIDsequence.getAndIncrement();
-    private boolean isRented;
+    private boolean rented;
     private User currentUser;
     private boolean isReserved;
     private User currentQueuedUser;
 
-    boolean isRented() {
-        return isRented;
+    public boolean isRented() {
+        return rented;
     }
 
     void setRented(boolean rented) {
-        isRented = rented;
+        this.rented = rented;
+    }
+
+    public User getCurrentUser() {
+        return currentUser;
+    }
+
+    public void setCurrentUser(User currentUser) {
+        this.currentUser = currentUser;
     }
 }
